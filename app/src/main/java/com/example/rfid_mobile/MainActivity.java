@@ -19,15 +19,15 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<ObjectClass> objects = new ArrayList<ObjectClass>();
         if(objects.size()==0){
             objects.add(new ObjectClass(0, "Очки", "Прекрасные  очки", true, "Очки"));
-            objects.add(new ObjectClass(1, "Очки", "Волшебные  очки", true, "Очки"));
+            objects.add(new ObjectClass(1, "Очки", "Волшебные  очки", false, "Очки"));
             objects.add(new ObjectClass(2, "Очки", "Великолепные  очки", true, "Очки"));
         }
 
         // получаем элемент ListView
         ListView objectsList = findViewById(R.id.objectsList);
         // создаем адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,
-                android.R.layout.simple_list_item_1, objects);
+        ObjectAdapter adapter = new ObjectAdapter(this,
+                R.layout.object_mini, objects);
         // устанавливаем для списка адаптер
         objectsList.setAdapter(adapter);
         // добавляем для списка слушатель
