@@ -14,4 +14,6 @@ public class ObjectClass {
         this.status=status;
         this.category=category;
     }
+
+
 }

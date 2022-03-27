@@ -16,12 +16,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<ObjectClass> objects = new ArrayList<ObjectClass>();
+        ArrayList<ObjectClass> objects = new ArrayList<>();
         if(objects.size()==0){
-            objects.add(new ObjectClass(0, "Очки", "Прекрасные  очки", true, "Очки"));
-            objects.add(new ObjectClass(1, "Очки", "Волшебные  очки", false, "Очки"));
-            objects.add(new ObjectClass(2, "Очки", "Великолепные  очки", true, "Очки"));
+            objects.add(new ObjectClass(0, "glass", "glasses", true, "ork"));
+            objects.add(new ObjectClass(1, "pounce", "pouncess", false, "picle"));
+            objects.add(new ObjectClass(2, "richard", "Harrison", true, "Wells"));
         }
+
+
 
         // получаем элемент ListView
         ListView objectsList = findViewById(R.id.objectsList);

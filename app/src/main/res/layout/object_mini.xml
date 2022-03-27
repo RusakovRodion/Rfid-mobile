@@ -9,41 +9,44 @@
         android:id="@+id/nameObject"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:layout_marginStart="8dp"
         android:text="Название"
-        app:layout_constraintBottom_toTopOf="@+id/categoryObject"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/categoryObject"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Категория"
         android:textSize="18sp"
-        android:text="Название"
-        app:layout_constraintBottom_toTopOf="@+id/descObject"
         app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameObject" />
+
     <TextView
         android:id="@+id/descObject"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Описание"
         android:textSize="18sp"
-        android:text="Название"
-        app:layout_constraintBottom_toTopOf="@+id/statusObject"
         app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/categoryObject" />
+
     <TextView
         android:id="@+id/statusObject"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Статус"
         android:textSize="18sp"
-        android:text="Название"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descObject" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
