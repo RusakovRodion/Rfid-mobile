@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<ObjectClass> objects = new ArrayList<>();
         if(objects.size()==0){
-            objects.add(new ObjectClass(0, "glass", "glasses", true, "ork"));
-            objects.add(new ObjectClass(1, "pounce", "pouncess", false, "picle"));
-            objects.add(new ObjectClass(2, "richard", "Harrison", true, "Wells"));
+            objects.add(new ObjectClass(0, "Штатив", "Штатив для крепления телефона с круглой лампой", true, "Оборудование"));
+            objects.add(new ObjectClass(1, "Колонка JBL", "Водостойкая, портативная, среднего размера, подключение по bluetooth", false, "Колонка"));
+            objects.add(new ObjectClass(2, "Лампа", "Свет для съемок", true, "Оборудование"));
+            objects.add(new ObjectClass(3, "Стабилизатор", "Стабилизирует телефон при съемке", false, "Оборудование"));
+            objects.add(new ObjectClass(4, "Проектор", "Проектор, кабель HDMI", true, "Проектор"));
         }
-
-
 
         // получаем элемент ListView
         ListView objectsList = findViewById(R.id.objectsList);

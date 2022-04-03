@@ -36,9 +36,9 @@ public class ObjectAdapter extends ArrayAdapter<ObjectClass> {
         descView.setText(object.description);
         categoryView.setText(object.category);
         if (object.status == true) {
-            statusView.setText("на складе");
+            statusView.setText("Статус: на складе");
         } else {
-            statusView.setText("арендован");
+            statusView.setText("Статус: арендован");
         }
 
         return view;
