@@ -10,12 +10,30 @@
 
     <ListView
         android:id="@+id/objectsList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="361dp"
+        android:layout_height="498dp"
         android:dividerHeight="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/leftButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text='@string/lessSymbol'
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/objectsList" />
+
+    <Button
+        android:id="@+id/rightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text='@string/greaterSymbol'
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/objectsList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
