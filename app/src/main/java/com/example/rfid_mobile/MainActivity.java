@@ -2,11 +2,13 @@ package com.example.rfid_mobile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.Layout;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Button;
 import android.view.View;
 import java.util.ArrayList;
-
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 public class MainActivity extends AppCompatActivity {
@@ -66,12 +68,15 @@ public class MainActivity extends AppCompatActivity {
         // прикрепляем footer с кнопками
         LayoutInflater inflater = LayoutInflater.from(this);
         View footerView = inflater.inflate(R.layout.buttons_mini, null);
+        View headerView = inflater.inflate(R.layout.filters_mini, null);
         listView.addFooterView(footerView);
+        listView.addHeaderView(headerView);
         testDraw(currentPage, listView);
 
         //TODO добавляем для списка слушатель
         Button leftButton = findViewById(R.id.leftButton);
         Button rightButton = findViewById(R.id.rightButton);
+        ImageButton filterButton = findViewById(R.id.filterButton);
         if (TOTAL_PAGE_COUNT > 1) rightButton.setClickable(true);
         leftButton.setClickable(false);
         leftButton.setVisibility(View.INVISIBLE);
@@ -99,6 +104,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 rightButton.setVisibility(View.VISIBLE);
                 rightButton.setClickable(true);
+            }
+        });
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
