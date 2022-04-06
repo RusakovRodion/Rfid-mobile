@@ -8,7 +8,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-
+import android.view.LayoutInflater;
 public class MainActivity extends AppCompatActivity {
     //Кол-во элементов
     public int TOTAL_LIST_ITEMS = 0;
@@ -39,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         objects.add(new ObjectClass(12, "Лампа3", "Свет для съемок", true, "Оборудование"));
         objects.add(new ObjectClass(13, "Стабилизатор3", "Стабилизирует телефон при съемке", false, "Оборудование"));
         objects.add(new ObjectClass(14, "Проектор3", "Проектор, кабель HDMI", true, "Проектор"));
+        objects.add(new ObjectClass(15, "Штатив4", "Штатив для крепления телефона с круглой лампой", true, "Оборудование"));
+        objects.add(new ObjectClass(16, "Колонка JBL4", "Водостойкая, портативная, среднего размера, подключение по bluetooth", false, "Колонка"));
+        objects.add(new ObjectClass(17, "Лампа4", "Свет для съемок", true, "Оборудование"));
+        objects.add(new ObjectClass(18, "Стабилизатор4", "Стабилизирует телефон при съемке", false, "Оборудование"));
+        objects.add(new ObjectClass(19, "Проектор4", "Проектор, кабель HDMI", true, "Проектор"));
+        objects.add(new ObjectClass(20, "Штатив5", "Штатив для крепления телефона с круглой лампой", true, "Оборудование"));
+
         TOTAL_LIST_ITEMS = objects.size();
         TOTAL_PAGE_COUNT = TOTAL_LIST_ITEMS / NUM_ITEMS_PAGE + 1;
 
@@ -56,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
         // получаем элемент ListView
         ListView listView = findViewById(R.id.objectsList);
+        // прикрепляем footer с кнопками
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View footerView = inflater.inflate(R.layout.buttons_mini, null);
+        listView.addFooterView(footerView);
         testDraw(currentPage, listView);
 
         //TODO добавляем для списка слушатель
@@ -92,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    void testDraw(int currentPage, ListView listView){
+    void testDraw(int currentPage, ListView listView ){
         // создаем адаптер
         ObjectAdapter adapter = new ObjectAdapter(this,
                 R.layout.object_mini, objectsLists.get(currentPage-1));
