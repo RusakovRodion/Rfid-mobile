@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     android:background="@color/back"
-
     tools:context=".MainActivity">
 
     <ListView
