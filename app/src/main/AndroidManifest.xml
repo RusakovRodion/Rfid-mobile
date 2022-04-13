@@ -7,6 +7,7 @@
         android:icon="@drawable/ic_logo"
         android:label="RFID-MOBILE"
         android:roundIcon="@drawable/ic_logo"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Rfidmobile">
         <activity
@@ -18,6 +19,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:icon="@drawable/ic_logo"
+            android:name=".ObjectActivity"
+            android:exported="true">
         </activity>
     </application>
 
