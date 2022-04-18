@@ -1,6 +1,7 @@
 package com.example.rfid_mobile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Logic {
@@ -35,11 +36,51 @@ public class Logic {
 
     public static ObjectClass getObjectById(Integer id) {
         List<ObjectClass> objects = Logic.getObjects();
-        for (Integer i = 0; i < objects.size(); i++) {
+        for (int i = 0; i < objects.size(); i++) {
             if (objects.get(i).id == id) {
                 return objects.get(i);
             }
         }
         return null;
+    }
+
+    public static List<ObjectClass> sort(List<Boolean> status,List<Boolean> category, String name)
+    {
+        List<ObjectClass> filteredObjects = new ArrayList<>();
+        String[] categories = {"Оборудование", "Колонка", "Проектор"};
+        Boolean statusCheck = null;
+        if (status.get(0) && !status.get(1)) statusCheck = true;
+        else if (!status.get(0) && status.get(1)) statusCheck = false;
+        boolean categoryCheck = false;
+        boolean nameCheck = false;
+        name = name.toLowerCase();
+        for (Boolean cat:category) {
+            if (cat)
+            {
+                categoryCheck = true;
+                break;
+            }
+        }
+        if (!name.isEmpty()) {
+            nameCheck = true;
+        }
+        for (ObjectClass object:getObjects())
+        {
+            if ( statusCheck == null || object.status == statusCheck)
+            {
+                if (categoryCheck) {
+                    for (int i = 0; i < category.size(); i++) {
+                        if (category.get(i) && object.category.equals(categories[i])) {
+                            if (nameCheck) {
+                                if (object.name.toLowerCase().contains(name)) filteredObjects.add(object);
+                            }else filteredObjects.add(object);
+                        }
+                    }
+                }else if (nameCheck) {
+                    if (object.name.toLowerCase().contains(name)) filteredObjects.add(object);
+                }else filteredObjects.add(object);
+            }
+        }
+        return filteredObjects;
     }
 }

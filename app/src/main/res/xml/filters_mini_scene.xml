@@ -11,7 +11,7 @@
            <KeyAttribute
                motion:motionTarget="@+id/filterLayout"
                motion:framePosition="40"
-               android:alpha="0" />
+               android:alpha="0.6" />
            <KeyAttribute
                motion:motionTarget="@+id/filterLayout"
                motion:framePosition="100"
@@ -44,7 +44,7 @@
             android:id="@+id/filterLayout"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="530dp"
+            android:layout_height="480dp"
             motion:layout_constraintTop_toBottomOf="@+id/filterButton" />
     </ConstraintSet>
 </MotionScene>

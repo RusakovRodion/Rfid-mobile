@@ -10,11 +10,18 @@ import android.widget.Button;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import android.widget.AdapterView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.CheckBox;
+import android.widget.EditText;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 public class MainActivity extends AppCompatActivity {
     //Кол-во элементов
     public int TOTAL_LIST_ITEMS = 0;
@@ -22,28 +29,11 @@ public class MainActivity extends AppCompatActivity {
     public int NUM_ITEMS_PAGE   = 10;
     public int TOTAL_PAGE_COUNT = 0;
     public int currentPage = 0;
-    public ArrayList<ArrayList<ObjectClass>> objectsLists = new ArrayList<ArrayList<ObjectClass>>();
+    public ArrayList<ArrayList<ObjectClass>> objectsLists = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        List<ObjectClass> objects = Logic.getObjects();
-        TOTAL_LIST_ITEMS = objects.size();
-        TOTAL_PAGE_COUNT = TOTAL_LIST_ITEMS / NUM_ITEMS_PAGE + 1;
-
-        //Разбиваем список объектов на списки заданной длины NUM_ITEMS_PAGE
-        ArrayList<ObjectClass> tempObjList = new ArrayList<>();
-        for (int i = 0;i<TOTAL_LIST_ITEMS;i++) {
-            tempObjList.add(objects.get(i));
-            if ((i+1) % NUM_ITEMS_PAGE==0){
-                objectsLists.add((ArrayList<ObjectClass>) tempObjList.clone());
-                tempObjList.clear();
-            }
-        }
-        objectsLists.add((ArrayList<ObjectClass>) tempObjList.clone());
-        currentPage = 1;
-
         // получаем элемент ListView
         ListView listView = findViewById(R.id.objectsList);
         // прикрепляем footer с кнопками
@@ -52,7 +42,21 @@ public class MainActivity extends AppCompatActivity {
         View headerView = inflater.inflate(R.layout.filters_mini, null);
         listView.addFooterView(footerView);
         listView.addHeaderView(headerView);
-        testDraw(currentPage, listView);
+        // Получаем объекты для фильтрации
+        ArrayList<CheckBox> statusCheckboxes = new ArrayList<>();
+        statusCheckboxes.add(findViewById(R.id.onStorage));
+        statusCheckboxes.add(findViewById(R.id.onRent));
+        ArrayList<CheckBox> categoryCheckboxes = new ArrayList<>();
+        categoryCheckboxes.add(findViewById(R.id.category1));
+        categoryCheckboxes.add(findViewById(R.id.category2));
+        categoryCheckboxes.add(findViewById(R.id.category3));
+        TextInputLayout nameView = findViewById(R.id.searchBar);
+
+        Button leftButton = findViewById(R.id.leftButton);
+        Button rightButton = findViewById(R.id.rightButton);
+        Button searchButton = findViewById(R.id.searchButton);
+
+        test(statusCheckboxes, categoryCheckboxes, nameView, listView, rightButton, leftButton);
 
         // слушатель выбора в списке
         AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
@@ -65,14 +69,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         listView.setOnItemClickListener(itemListener);
-
-
-        Button leftButton = findViewById(R.id.leftButton);
-        Button rightButton = findViewById(R.id.rightButton);
-        ImageButton filterButton = findViewById(R.id.filterButton);
-        if (TOTAL_PAGE_COUNT > 1) rightButton.setClickable(true);
-        leftButton.setClickable(false);
-        leftButton.setVisibility(View.INVISIBLE);
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,12 +95,49 @@ public class MainActivity extends AppCompatActivity {
                 rightButton.setClickable(true);
             }
         });
-        filterButton.setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                test(statusCheckboxes, categoryCheckboxes, nameView, listView, rightButton, leftButton);
             }
         });
+    }
+
+
+
+    void test(ArrayList<CheckBox> statusCheckboxes, ArrayList<CheckBox> categoryCheckboxes, TextInputLayout nameView, ListView listView, Button rightButton, Button leftButton){
+
+        ArrayList<Boolean> status = new ArrayList<>();
+        status.add((statusCheckboxes.get(0)).isChecked());
+        status.add((statusCheckboxes.get(1)).isChecked());
+        ArrayList<Boolean> category = new ArrayList<>();
+        category.add((categoryCheckboxes.get(0)).isChecked());
+        category.add((categoryCheckboxes.get(1)).isChecked());
+        category.add((categoryCheckboxes.get(2)).isChecked());
+        String name = (Objects.requireNonNull((nameView).getEditText())).getText().toString().trim();
+        List<ObjectClass> objects = Logic.sort(status,category,name);
+        TOTAL_LIST_ITEMS = objects.size();
+        TOTAL_PAGE_COUNT = TOTAL_LIST_ITEMS / NUM_ITEMS_PAGE + 1;
+        objectsLists.clear();
+        //Разбиваем список объектов на списки заданной длины NUM_ITEMS_PAGE
+        ArrayList<ObjectClass> tempObjList = new ArrayList<>();
+        for (int i = 0;i<TOTAL_LIST_ITEMS;i++) {
+            tempObjList.add(objects.get(i));
+            if ((i+1) % NUM_ITEMS_PAGE==0){
+                objectsLists.add((ArrayList<ObjectClass>) tempObjList.clone());
+                tempObjList.clear();
+            }
+        }
+        objectsLists.add((ArrayList<ObjectClass>) tempObjList.clone());
+        currentPage = 1;
+        rightButton.setClickable(false);
+        rightButton.setVisibility(View.INVISIBLE);
+        if (TOTAL_PAGE_COUNT > 1) rightButton.setClickable(true);
+        leftButton.setClickable(false);
+        leftButton.setVisibility(View.INVISIBLE);
+
+
+        testDraw(currentPage, listView);
     }
 
     void openObject(ObjectClass object) {
@@ -114,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void testDraw(int currentPage, ListView listView ){
+
         // создаем адаптер
         ObjectAdapter adapter = new ObjectAdapter(this,
                 R.layout.object_mini, objectsLists.get(currentPage-1));

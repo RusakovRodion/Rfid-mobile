@@ -17,7 +17,7 @@
         app:layout_constraintTop_toBottomOf="@+id/filterButton">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/searchButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -98,25 +98,12 @@
             app:layout_constraintTop_toBottomOf="@+id/statusLayout">
 
             <CheckBox
-                android:id="@+id/category4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:minHeight="48dp"
-                android:text="категория4"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/category3"
-                tools:ignore="HardcodedText" />
-
-            <CheckBox
                 android:id="@+id/category3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:minHeight="48dp"
-                android:text="категория3"
+                android:text="проектор"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -129,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:minHeight="48dp"
-                android:text="категория2"
+                android:text="колонка"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +130,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:minHeight="48dp"
-                android:text="категория1"
+                android:text="оборудование"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
