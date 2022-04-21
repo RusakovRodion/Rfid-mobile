@@ -132,7 +132,10 @@ public class MainActivity extends AppCompatActivity {
         currentPage = 1;
         rightButton.setClickable(false);
         rightButton.setVisibility(View.INVISIBLE);
-        if (TOTAL_PAGE_COUNT > 1) rightButton.setClickable(true);
+        if (TOTAL_PAGE_COUNT > 1) {
+            rightButton.setVisibility(View.VISIBLE);
+            rightButton.setClickable(true);
+        }
         leftButton.setClickable(false);
         leftButton.setVisibility(View.INVISIBLE);
 
