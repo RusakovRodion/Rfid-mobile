@@ -72,7 +72,7 @@ public class ObjectActivity extends AppCompatActivity {
                         .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
+                                finish();
                             }
                         }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
                     @Override
