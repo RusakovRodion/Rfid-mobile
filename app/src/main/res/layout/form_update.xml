@@ -54,30 +54,17 @@
         app:layout_constraintTop_toBottomOf="@id/inputNameBar"
         tools:ignore="HardcodedText" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputCategoryBar"
+    <Spinner
+        android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:backgroundTint="@color/black"
-        android:baselineAligned="false"
-        android:hint="Категория"
-        app:hintEnabled="false"
-        app:layout_constraintTop_toBottomOf="@id/inputCategoryLabel"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:ignore="HardcodedText">
-
-        <AutoCompleteTextView
-            android:id="@+id/inputCategory"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/black"
-            android:textColor="@color/black"
-            android:inputType="none"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginTop="4dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:popupBackground="@color/back"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCategoryLabel" />
 
     <TextView
         android:id="@+id/inputDescLabel"
@@ -88,7 +75,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputCategoryBar"
+        app:layout_constraintTop_toBottomOf="@id/spinner1"
         tools:ignore="HardcodedText" />
 
     <com.google.android.material.textfield.TextInputLayout
