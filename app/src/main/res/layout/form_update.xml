@@ -54,28 +54,17 @@
         app:layout_constraintTop_toBottomOf="@id/inputNameBar"
         tools:ignore="HardcodedText" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:popupBackground="@color/back"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputCategoryLabel" />
-
     <TextView
         android:id="@+id/inputDescLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
         android:text="Описание"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner1"
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
         tools:ignore="HardcodedText" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -103,5 +92,17 @@
             android:lines="5"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/black"
+        android:popupBackground="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCategoryLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

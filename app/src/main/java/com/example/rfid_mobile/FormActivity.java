@@ -25,7 +25,7 @@ public class FormActivity extends AppCompatActivity {
         ArrayList<String> categories = Logic.getCategories();
 
         //get the spinner from the xml.
-        Spinner dropdown = findViewById(R.id.spinner1);
+        Spinner dropdown = findViewById(R.id.spinner);
 //create a list of items for the spinner.
         String[] items = new String[]{"1", "2", "three"};
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
