@@ -1,25 +1,18 @@
 package com.example.rfid_mobile;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-
-import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ObjectActivity extends AppCompatActivity {
 
     ObjectClass object;
-    AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,25 +35,11 @@ public class ObjectActivity extends AppCompatActivity {
 
         Button editObjectButton = findViewById(R.id.editObjectButton);
         Button deleteObjectButton = findViewById(R.id.deleteObjectButton);
-        builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         editObjectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                builder.setTitle("Внимание")
-                        .setMessage("Вы точно хотите редактировать "+name.getText()+"?")
-                        .setCancelable(true)
-                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        })
-                        .show();
+               editObject();
             }
         });
         deleteObjectButton.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +62,13 @@ public class ObjectActivity extends AppCompatActivity {
                         .show();
             }
         });
+    }
+
+    void editObject() {
+        Intent intent = new Intent(this, FormActivity.class);
+        intent.putExtra("id", object.id);
+        intent.putExtra("type", "edit");
+        startActivity(intent);
     }
 }
 

@@ -44,10 +44,20 @@ public class Logic {
         return null;
     }
 
+    public static ArrayList<String> getCategories() {
+        ArrayList<String> categories = new ArrayList<String>();
+        for (ObjectClass object:getObjects()) {
+            if (categories.indexOf(object.category) == -1) {
+                categories.add(object.category);
+            }
+        }
+        return categories;
+    }
+
     public static List<ObjectClass> sort(List<Boolean> status,List<Boolean> category, String name)
     {
         List<ObjectClass> filteredObjects = new ArrayList<>();
-        String[] categories = {"Оборудование", "Колонка", "Проектор"};
+        String[] categories = getCategories().toArray(new String[0]);
         Boolean statusCheck = null;
         if (status.get(0) && !status.get(1)) statusCheck = true;
         else if (!status.get(0) && status.get(1)) statusCheck = false;

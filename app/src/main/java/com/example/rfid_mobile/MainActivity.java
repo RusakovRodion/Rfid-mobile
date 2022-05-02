@@ -3,8 +3,6 @@ package com.example.rfid_mobile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.text.Layout;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Button;
 import android.view.View;
@@ -13,13 +11,10 @@ import java.util.List;
 import java.util.Objects;
 
 import android.widget.AdapterView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.CheckBox;
-import android.widget.EditText;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -138,8 +133,6 @@ public class MainActivity extends AppCompatActivity {
         }
         leftButton.setClickable(false);
         leftButton.setVisibility(View.INVISIBLE);
-
-
         testDraw(currentPage, listView);
     }
 
