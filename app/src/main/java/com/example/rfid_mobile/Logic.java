@@ -44,6 +44,11 @@ public class Logic {
         return null;
     }
 
+    public static Boolean saveEdit(ObjectClass obj){
+        ObjectClass test = obj;
+        return true;
+    }
+
     public static ArrayList<String> getCategories() {
         ArrayList<String> categories = new ArrayList<String>();
         for (ObjectClass object:getObjects()) {
