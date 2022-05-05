@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // прикрепляем footer с кнопками
         LayoutInflater inflater = LayoutInflater.from(this);
         View footerView = inflater.inflate(R.layout.buttons_mini, null);
-        View headerView = inflater.inflate(R.layout.filters_mini, null);
+        View headerView = inflater.inflate(R.layout.filter, null);
         listView.addFooterView(footerView);
         listView.addHeaderView(headerView);
         // Получаем объекты для фильтрации

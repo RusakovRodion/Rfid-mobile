@@ -25,14 +25,21 @@
         <entry key="..\:/Users/kopte/Desktop/git/Rfid-mobile/app/src/main/res/layout/filters_mini.xml" value="0.2572463768115942" />
         <entry key="..\:/Users/kopte/Desktop/git/Rfid-mobile/app/src/main/res/layout/object_mini.xml" value="0.35688405797101447" />
         <entry key="..\:/Users/tri29/AppData/Local/Android/Sdk/platforms/android-32/data/res/drawable/btn_dropdown.xml" value="0.1" />
+        <entry key="..\:/Users/tri29/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.1421875" />
         <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/activity_main.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/activity_object.xml" value="0.35597826086956524" />
         <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/buttons_mini.xml" value="0.35597826086956524" />
+        <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/dropdown_item.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/filters_mini.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/form_add.xml" value="0.27309782608695654" />
         <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/form_update.xml" value="0.28448275862068967" />
         <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/mark_without_object.xml" value="0.25" />
+        <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/object_from_rfid.xml" value="0.33" />
         <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/object_mini.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/rent_form.xml" value="0.33" />
+        <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/simple_spinner_dropdown_item.xml" value="0.1398148148148148" />
+        <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/spinner_item.xml" value="0.371875" />
+        <entry key="..\:/Users/tri29/Desktop/rfid3/Rfid-mobile/app/src/main/res/layout/update_form.xml" value="0.19166666666666668" />
       </map>
     </option>
   </component>

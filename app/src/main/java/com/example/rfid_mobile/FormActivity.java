@@ -1,14 +1,11 @@
 package com.example.rfid_mobile;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -25,7 +22,7 @@ public class FormActivity extends AppCompatActivity {
         Bundle arguments = getIntent().getExtras();
         String type = arguments.getString("type");
         Integer id = arguments.getInt("id");
-        setContentView(R.layout.form_update);
+        setContentView(R.layout.update_form);
         this.object = Logic.getObjectById(id);
 
         TextInputLayout nameView = findViewById(R.id.inputNameBar);
@@ -39,7 +36,7 @@ public class FormActivity extends AppCompatActivity {
         ArrayList<String> categories = Logic.getCategories();
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
 //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
 //set the spinners adapter to the previously created one.
         spinner.setAdapter(adapter);
 
@@ -67,6 +64,7 @@ public class FormActivity extends AppCompatActivity {
                 }else{
                     //report error request
                 }
+                finish();
             }
         });
     }

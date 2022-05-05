@@ -19,7 +19,7 @@ public class ObjectActivity extends AppCompatActivity {
         Bundle arguments = getIntent().getExtras();
         Integer id = arguments.getInt("id");
         this.object = Logic.getObjectById(id);
-        setContentView(R.layout.activity_object);
+        setContentView(R.layout.object_from_catalog);
         TextView name = findViewById(R.id.nameObject);
         name.setText(object.name);
         TextView cat = findViewById(R.id.categoryObject);
