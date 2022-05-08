@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
                 // получаем выбранный пункт
                 ObjectClass selectedObject = (ObjectClass)parent.getItemAtPosition(position);
-                openObject(selectedObject);
+                //openObject(selectedObject);
+                openEmptyObject();
             }
         };
         listView.setOnItemClickListener(itemListener);
@@ -139,6 +140,13 @@ public class MainActivity extends AppCompatActivity {
     void openObject(ObjectClass object) {
         Intent intent = new Intent(this, ObjectActivity.class);
         intent.putExtra("id", object.id);
+        //intent.putExtra("parent", "MainActivity");
+        intent.putExtra("parent", "Logic");
+        startActivity(intent);
+    }
+
+    void openEmptyObject() {
+        Intent intent = new Intent(this, EmptyActivity.class);
         startActivity(intent);
     }
 

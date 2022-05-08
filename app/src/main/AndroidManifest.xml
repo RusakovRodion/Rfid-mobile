@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rfidmobile">
         <activity
-            android:name=".FormActivity"/>
+            android:name=".EmptyActivity"
+            android:exported="false" />
+        <activity android:name=".FormActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -25,7 +27,7 @@
         <activity
             android:name=".ObjectActivity"
             android:exported="true"
-            android:icon="@drawable/ic_logo"></activity>
+            android:icon="@drawable/ic_logo" />
     </application>
 
 </manifest>

@@ -49,6 +49,23 @@ public class Logic {
         return true;
     }
 
+    public static Boolean returnObject(int id){
+        //Возвращение объекта на склад
+        return true;
+    }
+
+    public static Boolean rentalObject(RentalClass obj){
+        RentalClass test = obj;
+        //Аренда объекта со склада
+        return true;
+    }
+
+    public static Boolean addObject(ObjectClass obj){
+        ObjectClass test = obj;
+        //Добавление объекта к непривязанной метке
+        return true;
+    }
+
     public static ArrayList<String> getCategories() {
         ArrayList<String> categories = new ArrayList<String>();
         for (ObjectClass object:getObjects()) {

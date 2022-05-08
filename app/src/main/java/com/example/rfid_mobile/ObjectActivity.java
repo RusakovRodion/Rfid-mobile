@@ -18,8 +18,13 @@ public class ObjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle arguments = getIntent().getExtras();
         Integer id = arguments.getInt("id");
+        String parent = arguments.getString("parent");
         this.object = Logic.getObjectById(id);
-        setContentView(R.layout.object_from_catalog);
+        if (parent.equals("MainActivity")) {
+            setContentView(R.layout.object_from_catalog);
+        }else{
+            setContentView(R.layout.object_from_rfid);
+        }
         TextView name = findViewById(R.id.nameObject);
         name.setText(object.name);
         TextView cat = findViewById(R.id.categoryObject);
@@ -62,12 +67,46 @@ public class ObjectActivity extends AppCompatActivity {
                         .show();
             }
         });
+        if (parent.equals("Logic"))
+        {
+            Button rentObjectButton = findViewById(R.id.rentObjectButton);
+            if (object.status) {
+                rentObjectButton.setText("Взять в аренду");
+                rentObjectButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rentObject();
+                    }
+                });
+            } else {
+                rentObjectButton.setText("Вернуть на склад");
+                if (Logic.returnObject(object.id)){
+                    builder.setTitle("Внимание")
+                            .setMessage("Объект успешно возвращен на склад")
+                            .setCancelable(true)
+                    .show();
+                }else{
+                    builder.setTitle("Внимание")
+                            .setMessage("Ошибка при возвращении на склад.")
+                            .setCancelable(true)
+                            .show();
+                }
+
+            }
+        }
     }
 
     void editObject() {
         Intent intent = new Intent(this, FormActivity.class);
         intent.putExtra("id", object.id);
         intent.putExtra("type", "edit");
+        startActivity(intent);
+    }
+
+    void rentObject() {
+        Intent intent = new Intent(this, FormActivity.class);
+        intent.putExtra("id", object.id);
+        intent.putExtra("type", "rent");
         startActivity(intent);
     }
 }
