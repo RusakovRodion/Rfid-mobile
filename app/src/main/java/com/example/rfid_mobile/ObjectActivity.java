@@ -80,18 +80,34 @@ public class ObjectActivity extends AppCompatActivity {
                 });
             } else {
                 rentObjectButton.setText("Вернуть на склад");
-                if (Logic.returnObject(object.id)){
-                    builder.setTitle("Внимание")
-                            .setMessage("Объект успешно возвращен на склад")
-                            .setCancelable(true)
-                    .show();
-                }else{
-                    builder.setTitle("Внимание")
-                            .setMessage("Ошибка при возвращении на склад.")
-                            .setCancelable(true)
-                            .show();
-                }
-
+                rentObjectButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (Logic.returnObject(object.id)){
+                            builder.setTitle("Внимание")
+                                    .setMessage("Объект успешно возвращен на склад")
+                                    .setCancelable(true)
+                                    .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    finish();
+                                }
+                            })
+                                    .show();
+                        }else{
+                            builder.setTitle("Внимание")
+                                    .setMessage("Ошибка при возвращении на склад.")
+                                    .setCancelable(true)
+                                    .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            finish();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    }
+                });
             }
         }
     }

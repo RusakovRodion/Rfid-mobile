@@ -59,6 +59,7 @@ public class FormActivity extends AppCompatActivity {
                 }
             }
             Button saveEditButton = findViewById(R.id.saveEditButton);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             saveEditButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -71,11 +72,28 @@ public class FormActivity extends AppCompatActivity {
                     ObjectClass obj = new ObjectClass(id, name, description, status, category);
                     if (Logic.saveEdit(obj))
                     {
-                        //report success request
+                        builder.setTitle("Внимание")
+                                .setMessage("Объект успешно изменен")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                })
+                                .show();
                     }else{
-                        //report error request
+                        builder.setTitle("Внимание")
+                                .setMessage("Объект не был изменен. Ошибка.")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                })
+                                .show();
                     }
-                    finish();
                 }
             });
         }
@@ -97,17 +115,29 @@ public class FormActivity extends AppCompatActivity {
                     String endDate = dateButton2.getText().toString().trim();
                     //Какой id?
                     RentalClass rentalObject = new RentalClass(name, startDate, endDate, id);
-                    Logic.rentalObject(rentalObject);
-                    builder.setTitle("Внимание")
-                            .setMessage("Объект успешно арендован")
-                            .setCancelable(true)
-                            .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish();
-                                }
-                            })
-                            .show();
+                    if (Logic.rentalObject(rentalObject)) {
+                        builder.setTitle("Внимание")
+                                .setMessage("Объект успешно арендован")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                })
+                                .show();
+                    }else{
+                        builder.setTitle("Внимание")
+                                .setMessage("Объект не был арендован. Ошибка.")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                })
+                                .show();
+                    }
                 }
             });
         }
@@ -126,6 +156,7 @@ public class FormActivity extends AppCompatActivity {
             spinner.setAdapter(adapter);
 
             Button addObject = findViewById(R.id.addObject);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             addObject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -138,11 +169,28 @@ public class FormActivity extends AppCompatActivity {
                     ObjectClass obj = new ObjectClass(-1, name, description, status, category);
                     if (Logic.addObject(obj))
                     {
-                        //report success request
+                        builder.setTitle("Внимание")
+                                .setMessage("Объект успешно добавлен")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                })
+                                .show();
                     }else{
-                        //report error request
+                        builder.setTitle("Внимание")
+                                .setMessage("Объект не был добавлен. Ошибка.")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                })
+                                .show();
                     }
-                    finish();
                 }
             });
         }

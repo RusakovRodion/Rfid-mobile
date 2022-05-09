@@ -41,6 +41,11 @@ public class Logic {
                 return objects.get(i);
             }
         }
+        //TODO Отправить на сервер
+        ConnectClass connect = new ConnectClass();
+        new Thread(connect).start();
+        String msg = "find_object|"+id.toString();
+        String answer = connect.sendMsg(msg);
         return null;
     }
 
@@ -65,6 +70,8 @@ public class Logic {
         //Добавление объекта к непривязанной метке
         return true;
     }
+
+
 
     public static ArrayList<String> getCategories() {
         ArrayList<String> categories = new ArrayList<String>();
