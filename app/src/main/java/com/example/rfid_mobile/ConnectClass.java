@@ -13,7 +13,6 @@ public class ConnectClass implements Runnable {
     Socket socket;
     DataOutputStream dos;
     BufferedReader dis;
-    byte[] bt;
     String host = "25.66.192.245";
     int port = 777;
     String answer;
@@ -34,7 +33,7 @@ public class ConnectClass implements Runnable {
             dos.close();
             socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 

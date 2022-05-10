@@ -115,7 +115,8 @@ public class FormActivity extends AppCompatActivity {
                     String endDate = dateButton2.getText().toString().trim();
                     //Какой id?
                     RentalClass rentalObject = new RentalClass(name, startDate, endDate, id);
-                    if (Logic.rentalObject(rentalObject)) {
+                    if (Logic.newRental(rentalObject)) {
+                        Logic.rentalObject(id);
                         builder.setTitle("Внимание")
                                 .setMessage("Объект успешно арендован")
                                 .setCancelable(true)
