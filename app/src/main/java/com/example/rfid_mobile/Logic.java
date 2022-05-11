@@ -26,16 +26,14 @@ public class Logic {
         return objects;
     }
 
-    public static int scanRfid(){
+    public static String[] scanRfid(){
 //        // TODO отсканировать метку
-//        String msg = "check_rfid";
-//        String answer = con(msg);
-//        int tempAnswer = Integer.parseInt(answer);
-//        if (tempAnswer>0){
-//            return tempAnswer;
-//        }
+        String msg = "check_rfid";
+        String answer = con(msg);
+        String[] tempList = answer.split("\\|");
+
         //TODO получить правильный ответ (метка не привязана/кортеж)
-        return -1;
+        return tempList;
     }
 
 

@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
         addObjectFromMainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int idRfid = Logic.scanRfid();
-                if (idRfid < 0){
-                    openEmptyObject();
+                String[] args = Logic.scanRfid();
+                if (args[0].equals("false")){
+                    openEmptyObject(Integer.parseInt(args[1]));
                 }else{
-                    openObject(idRfid);
+                    openObject(Integer.parseInt(args[1]));
                 }
             }
         });
@@ -165,8 +165,9 @@ public class MainActivity extends AppCompatActivity {
         this.startActivityForResult(intent, 1);
     }
 
-    void openEmptyObject() {
+    void openEmptyObject(int idRfid) {
         Intent intent = new Intent(this, EmptyActivity.class);
+        intent.putExtra("id", idRfid);
         this.startActivityForResult(intent, 1);
     }
 
