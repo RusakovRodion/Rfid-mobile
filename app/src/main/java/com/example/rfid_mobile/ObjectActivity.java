@@ -32,7 +32,7 @@ public class ObjectActivity extends AppCompatActivity {
         TextView desc = findViewById(R.id.descObject);
         desc.setText(object.description);
         TextView status = findViewById(R.id.statusObject);
-        if (object.status == true) {
+        if (!object.status) {
             status.setText("Статус: на складе");
         } else {
             status.setText("Статус: арендован");
@@ -71,7 +71,7 @@ public class ObjectActivity extends AppCompatActivity {
         if (parent.equals("Logic"))
         {
             Button rentObjectButton = findViewById(R.id.rentObjectButton);
-            if (object.status) {
+            if (!object.status) {
                 rentObjectButton.setText("Взять в аренду");
                 rentObjectButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -117,14 +117,22 @@ public class ObjectActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FormActivity.class);
         intent.putExtra("id", object.id);
         intent.putExtra("type", "edit");
-        startActivity(intent);
+        this.startActivityForResult(intent, 1);
     }
 
     void rentObject() {
         Intent intent = new Intent(this, FormActivity.class);
         intent.putExtra("id", object.id);
         intent.putExtra("type", "rent");
-        startActivity(intent);
+        this.startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Intent refreshIntent = getIntent();
+        finish();
+        startActivity(refreshIntent);
     }
 }
 

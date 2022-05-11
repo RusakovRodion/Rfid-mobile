@@ -7,6 +7,7 @@ import android.widget.ListView;
 import android.widget.Button;
 import android.view.View;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,23 +46,34 @@ public class MainActivity extends AppCompatActivity {
         categoryCheckboxes.add(findViewById(R.id.category1));
         categoryCheckboxes.add(findViewById(R.id.category2));
         categoryCheckboxes.add(findViewById(R.id.category3));
+        categoryCheckboxes.add(findViewById(R.id.category4));
         TextInputLayout nameView = findViewById(R.id.searchBar);
 
         Button leftButton = findViewById(R.id.leftButton);
         Button rightButton = findViewById(R.id.rightButton);
         Button searchButton = findViewById(R.id.searchButton);
 
+        Button addObjectFromMainBtn = findViewById(R.id.addObjectFromMainBtn);
+        addObjectFromMainBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int idRfid = Logic.scanRfid();
+                if (idRfid < 0){
+                    openEmptyObject();
+                }else{
+                    openObject(idRfid);
+                }
+            }
+        });
+
         test(statusCheckboxes, categoryCheckboxes, nameView, listView, rightButton, leftButton);
 
-        // слушатель выбора в списке
         AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-                // получаем выбранный пункт
                 ObjectClass selectedObject = (ObjectClass)parent.getItemAtPosition(position);
-                openObject(selectedObject);
-                //openEmptyObject();
+                openObject(selectedObject.id);
             }
         };
         listView.setOnItemClickListener(itemListener);
@@ -103,13 +115,20 @@ public class MainActivity extends AppCompatActivity {
 
     void test(ArrayList<CheckBox> statusCheckboxes, ArrayList<CheckBox> categoryCheckboxes, TextInputLayout nameView, ListView listView, Button rightButton, Button leftButton){
 
-        ArrayList<Boolean> status = new ArrayList<>();
-        status.add((statusCheckboxes.get(0)).isChecked());
-        status.add((statusCheckboxes.get(1)).isChecked());
-        ArrayList<Boolean> category = new ArrayList<>();
+        List<Boolean> category = new ArrayList<>();
+        String status = "";
+        if (statusCheckboxes.get(0).isChecked() && !statusCheckboxes.get(1).isChecked())
+        {
+            status = "false";
+        }else if (statusCheckboxes.get(1).isChecked() && !statusCheckboxes.get(0).isChecked()){
+            status = "true";
+        }else{
+            status = "both";
+        }
         category.add((categoryCheckboxes.get(0)).isChecked());
         category.add((categoryCheckboxes.get(1)).isChecked());
         category.add((categoryCheckboxes.get(2)).isChecked());
+        category.add((categoryCheckboxes.get(3)).isChecked());
         String name = (Objects.requireNonNull((nameView).getEditText())).getText().toString().trim();
         List<ObjectClass> objects = Logic.sort(status,category,name);
         TOTAL_LIST_ITEMS = objects.size();
@@ -137,17 +156,18 @@ public class MainActivity extends AppCompatActivity {
         testDraw(currentPage, listView);
     }
 
-    void openObject(ObjectClass object) {
+    void openObject(int idRfid) {
+        ObjectClass object = Logic.getObjectById(idRfid);
         Intent intent = new Intent(this, ObjectActivity.class);
         intent.putExtra("id", object.id);
         //intent.putExtra("parent", "MainActivity");
         intent.putExtra("parent", "Logic");
-        startActivity(intent);
+        this.startActivityForResult(intent, 1);
     }
 
     void openEmptyObject() {
         Intent intent = new Intent(this, EmptyActivity.class);
-        startActivity(intent);
+        this.startActivityForResult(intent, 1);
     }
 
     void testDraw(int currentPage, ListView listView ){
@@ -159,4 +179,11 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Intent refreshIntent = getIntent();
+        finish();
+        startActivity(refreshIntent);
+    }
 }

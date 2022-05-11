@@ -167,7 +167,7 @@ public class FormActivity extends AppCompatActivity {
                     boolean status = true;
                     String category = spinner.getSelectedItem().toString();
 
-                    ObjectClass obj = new ObjectClass(-1, name, description, status, category);
+                    ObjectClass obj = new ObjectClass((int) Math.random(), name, description, status, category);
                     if (Logic.addObject(obj))
                     {
                         builder.setTitle("Внимание")
