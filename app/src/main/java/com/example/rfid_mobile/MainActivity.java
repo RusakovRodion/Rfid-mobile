@@ -58,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String[] args = Logic.scanRfid();
-                if (args[0].equals("false")){
-                    openEmptyObject(Integer.parseInt(args[1]));
+                if (args[0].equals("False")){
+                    openEmptyObject(args[1]);
                 }else{
-                    openObject(Integer.parseInt(args[1]));
+                    openObject(args[1]);
                 }
             }
         });
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         testDraw(currentPage, listView);
     }
 
-    void openObject(int idRfid) {
+    void openObject(String idRfid) {
         ObjectClass object = Logic.getObjectById(idRfid);
         Intent intent = new Intent(this, ObjectActivity.class);
         intent.putExtra("id", object.id);
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         this.startActivityForResult(intent, 1);
     }
 
-    void openEmptyObject(int idRfid) {
+    void openEmptyObject(String idRfid) {
         Intent intent = new Intent(this, EmptyActivity.class);
         intent.putExtra("id", idRfid);
         this.startActivityForResult(intent, 1);

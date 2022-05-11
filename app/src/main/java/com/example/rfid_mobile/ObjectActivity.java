@@ -17,13 +17,20 @@ public class ObjectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle arguments = getIntent().getExtras();
-        Integer id = arguments.getInt("id");
+        String id = arguments.getString("id");
         String parent = arguments.getString("parent");
         this.object = Logic.getObjectById(id);
         if (parent.equals("MainActivity")) {
             setContentView(R.layout.object_from_catalog);
         }else{
             setContentView(R.layout.object_from_rfid);
+        }
+        TextView infoRental = findViewById(R.id.infoRental);
+        if (object.status){
+            infoRental.setVisibility(View.VISIBLE);
+            RentalClass rental = Logic.infoRental(id);
+        }else{
+            infoRental.setVisibility(View.INVISIBLE);
         }
         TextView name = findViewById(R.id.nameObject);
         name.setText(object.name);

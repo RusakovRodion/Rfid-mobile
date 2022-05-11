@@ -33,7 +33,7 @@ public class FormActivity extends AppCompatActivity {
         String type = arguments.getString("type");
         if (type.equals("edit")){
             setContentView(R.layout.update_form);
-            Integer id = arguments.getInt("id");
+            String id = arguments.getString("id");
             this.object = Logic.getObjectById(id);
 
             TextInputLayout nameView = findViewById(R.id.inputNameBar);
@@ -99,7 +99,7 @@ public class FormActivity extends AppCompatActivity {
         }
         else if (type.equals("rent")) {
             setContentView(R.layout.rent_form);
-            Integer id = arguments.getInt("id");
+            String id = arguments.getString("id");
             setInitialDateTime();
 
             Button rentObjectButton2 = findViewById(R.id.rentObjectButton2);
@@ -144,7 +144,7 @@ public class FormActivity extends AppCompatActivity {
         }
         else if (type.equals("add")){
             setContentView(R.layout.add_form);
-            Integer id = arguments.getInt("id");
+            String id = arguments.getString("id");
             TextInputLayout nameView = findViewById(R.id.inputNameBar);
             Spinner spinner = (Spinner)findViewById(R.id.spinner);
             TextInputLayout descView = findViewById(R.id.inputDescBar);

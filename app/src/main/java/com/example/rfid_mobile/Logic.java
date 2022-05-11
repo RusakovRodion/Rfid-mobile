@@ -20,7 +20,7 @@ public class Logic {
         String[] tempList = answer.split("\\|");
         for (String i : tempList) {
             String[] temp = i.split("&");
-            objects.add(new ObjectClass(Integer.parseInt(temp[0]), temp[1], temp[2], temp[3].equals("1"), temp[4]));
+            objects.add(new ObjectClass(temp[0], temp[1], temp[2], temp[3].equals("1"), temp[4]));
         }
 
         return objects;
@@ -37,11 +37,11 @@ public class Logic {
     }
 
 
-    public static ObjectClass getObjectById(Integer id) {
+    public static ObjectClass getObjectById(String id) {
         String msg = "find_object|"+id.toString();
         String answer = con(msg);
         String[] temp = answer.split("&");
-        return new ObjectClass(Integer.parseInt(temp[0]), temp[1], temp[2], temp[3].equals("1"), temp[4]);
+        return new ObjectClass(temp[0], temp[1], temp[2], temp[3].equals("1"), temp[4]);
     }
 
     public static Boolean saveEdit(ObjectClass obj){
@@ -50,7 +50,7 @@ public class Logic {
         return !answer.regionMatches(0, "False", 0, 5);
     }
 
-    public static Boolean returnObject(int id){
+    public static Boolean returnObject(String id){
         String msg = "return_object|"+id;
         String answer = con(msg);
         return !answer.regionMatches(0, "False", 0, 5);
@@ -59,23 +59,30 @@ public class Logic {
     public static Boolean newRental(RentalClass obj){
         String msg = "new_rent|"+obj.name+"|"+obj.startDate+"|"+obj.endDate+"|"+obj.objectID;
         String answer = con(msg);
-        return answer.equals("true");
+        return !answer.regionMatches(0, "False", 0, 5);
     }
 
-    public static Boolean deleteObject(int id){
+    public static Boolean deleteObject(String id){
         String msg = "delete_object|"+id;
         String answer = con(msg);
         return answer.equals("true");
     }
 
-    public static Boolean rentalObject(int id) {
+    public static RentalClass infoRental(String id) {
+        String msg = "infa_rental|"+id;
+        String answer = con(msg);
+        RentalClass temp = new RentalClass("", "", "", "");
+        return temp;
+    }
+
+    public static Boolean rentalObject(String id) {
         String msg = "rental_object|"+id;
         String answer = con(msg);
         return answer.equals("true");
     }
 
     public static Boolean addObject(ObjectClass obj){
-        String msg = "new_object|"+obj.id+"|"+obj.name+"|"+obj.name+"|"+obj.description+"|"+obj.category;
+        String msg = "new_object|"+obj.id+"|"+obj.name+"|"+obj.description+"|"+obj.category;
         String answer = con(msg);
         return !answer.regionMatches(0, "False", 0, 5);
     }
@@ -111,7 +118,7 @@ public class Logic {
         String[] tempList = answer.split("\\|");
         for (String i : tempList) {
             String[] temp = i.split("&");
-            objects.add(new ObjectClass(Integer.parseInt(temp[0]), temp[1], temp[2], temp[3].equals("1"), temp[4]));
+            objects.add(new ObjectClass(temp[0], temp[1], temp[2], temp[3].equals("1"), temp[4]));
         }
         return objects;
         //return getObjects();

@@ -14,7 +14,7 @@ public class EmptyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.empty_rfid);
         Bundle arguments = getIntent().getExtras();
-        Integer id = arguments.getInt("id");
+        String id = arguments.getString("id");
         Button addObjectButton = findViewById(R.id.addObjectButton);
         addObjectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -23,7 +23,7 @@ public class EmptyActivity extends AppCompatActivity {
             }
         });
     }
-    void addObject(Integer id) {
+    void addObject(String id) {
         Intent intent = new Intent(this, FormActivity.class);
         intent.putExtra("type", "add");
         intent.putExtra("id", id);
