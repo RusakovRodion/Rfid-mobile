@@ -2,6 +2,8 @@ package com.example.rfid_mobile;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ public class ObjectActivity extends AppCompatActivity {
 
     ObjectClass object;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +32,9 @@ public class ObjectActivity extends AppCompatActivity {
         if (object.status){
             infoRental.setVisibility(View.VISIBLE);
             RentalClass rental = Logic.infoRental(id);
+            infoRental.setText("Информация об аренде:\n"+rental.name+" "+rental.startDate+" - "+rental.endDate);
         }else{
-            infoRental.setVisibility(View.INVISIBLE);
+            infoRental.setVisibility(View.GONE);
         }
         TextView name = findViewById(R.id.nameObject);
         name.setText(object.name);

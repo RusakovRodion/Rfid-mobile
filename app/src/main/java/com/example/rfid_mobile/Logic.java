@@ -71,8 +71,9 @@ public class Logic {
     public static RentalClass infoRental(String id) {
         String msg = "infa_rental|"+id;
         String answer = con(msg);
-        RentalClass temp = new RentalClass("", "", "", "");
-        return temp;
+        String[] temp = answer.split("&");
+        RentalClass rental = new RentalClass(temp[0], temp[1], temp[2], id);
+        return rental;
     }
 
     public static Boolean rentalObject(String id) {
