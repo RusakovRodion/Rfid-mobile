@@ -40,7 +40,9 @@ public class Logic {
         String msg = "find_object|"+id.toString();
         String answer = con(msg);
         String[] temp = answer.split("&");
-
+        if (answer.regionMatches(0, "False", 0, 5)){
+            return null;
+        }
         return new ObjectClass(temp[0], temp[1], temp[2], temp[3].equals("1"), temp[4]);
     }
 
@@ -65,7 +67,7 @@ public class Logic {
     public static Boolean deleteObject(String id){
         String msg = "delete_object|"+id;
         String answer = con(msg);
-        return answer.equals("true");
+        return !answer.regionMatches(0, "False", 0, 5);
     }
 
     public static RentalClass infoRental(String id) {
@@ -74,10 +76,10 @@ public class Logic {
         String[] temp = answer.split("&");
 
         try {
-            Date date = new SimpleDateFormat("MMM d, y", Locale.forLanguageTag("ru")).parse(temp[1]);
-            temp[1] = new SimpleDateFormat("dd.MM.yy", Locale.forLanguageTag("ru")).format(date);
-            date = new SimpleDateFormat("MMM d, y", Locale.forLanguageTag("ru")).parse(temp[2]);
-            temp[2] = new SimpleDateFormat("dd.MM.yy", Locale.forLanguageTag("ru")).format(date);
+            Date date = new SimpleDateFormat("MMM d, y").parse(temp[1]);
+            temp[1] = new SimpleDateFormat("dd.MM.yy").format(date);
+            date = new SimpleDateFormat("MMM d, y").parse(temp[2]);
+            temp[2] = new SimpleDateFormat("dd.MM.yy").format(date);
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }

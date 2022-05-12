@@ -23,109 +23,140 @@ public class ObjectActivity extends AppCompatActivity {
         String id = arguments.getString("id");
         String parent = arguments.getString("parent");
         this.object = Logic.getObjectById(id);
-        if (parent.equals("MainActivity")) {
-            setContentView(R.layout.object_from_catalog);
-        }else{
-            setContentView(R.layout.object_from_rfid);
-        }
-        TextView infoRental = findViewById(R.id.infoRental);
-        if (object.status){
-            infoRental.setVisibility(View.VISIBLE);
-            RentalClass rental = Logic.infoRental(id);
-            infoRental.setText("Информация об аренде:\n"+rental.name+" "+rental.startDate+" - "+rental.endDate);
-        }else{
-            infoRental.setVisibility(View.GONE);
-        }
-        TextView name = findViewById(R.id.nameObject);
-        name.setText(object.name);
-        TextView cat = findViewById(R.id.categoryObject);
-        cat.setText(object.category);
-        TextView desc = findViewById(R.id.descObject);
-        desc.setText(object.description);
-        TextView status = findViewById(R.id.statusObject);
-        if (!object.status) {
-            status.setText("Статус: на складе");
+        if (this.object == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Внимание")
+                    .setMessage("Объект не найден")
+                    .setCancelable(true)
+                    .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    })
+                    .show();
         } else {
-            status.setText("Статус: арендован");
-        }
-
-        Button editObjectButton = findViewById(R.id.editObjectButton);
-        Button deleteObjectButton = findViewById(R.id.deleteObjectButton);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        editObjectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               editObject();
-            }
-        });
-        deleteObjectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                builder.setTitle("Внимание")
-                        .setMessage("Вы точно хотите удалить "+name.getText() +"?")
-                        .setCancelable(true)
-                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //TODO Диалоговые окна по возвращаемому значению
-                                Logic.deleteObject(id);
-                                finish();
-                            }
-                        }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                })
-                        .show();
-            }
-        });
-        if (parent.equals("Logic"))
-        {
-            Button rentObjectButton = findViewById(R.id.rentObjectButton);
-            if (!object.status) {
-                rentObjectButton.setText("Взять в аренду");
-                rentObjectButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //TODO Диалоговые окна по возвращаемому значению
-                        rentObject();
-                    }
-                });
+            if (parent.equals("MainActivity")) {
+                setContentView(R.layout.object_from_catalog);
             } else {
-                rentObjectButton.setText("Вернуть на склад");
-                rentObjectButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (Logic.returnObject(object.id)){
-                            builder.setTitle("Внимание")
-                                    .setMessage("Объект успешно возвращен на склад")
-                                    .setCancelable(true)
-                                    .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                setContentView(R.layout.object_from_rfid);
+            }
+            TextView infoRental = findViewById(R.id.infoRental);
+            if (object.status) {
+                infoRental.setVisibility(View.VISIBLE);
+                RentalClass rental = Logic.infoRental(id);
+                infoRental.setText("Информация об аренде:\n" + rental.name + " " + rental.startDate + " - " + rental.endDate);
+            } else {
+                infoRental.setVisibility(View.GONE);
+            }
+            TextView name = findViewById(R.id.nameObject);
+            name.setText(object.name);
+            TextView cat = findViewById(R.id.categoryObject);
+            cat.setText(object.category);
+            TextView desc = findViewById(R.id.descObject);
+            desc.setText(object.description);
+            TextView status = findViewById(R.id.statusObject);
+            if (!object.status) {
+                status.setText("Статус: на складе");
+            } else {
+                status.setText("Статус: арендован");
+            }
+
+            Button editObjectButton = findViewById(R.id.editObjectButton);
+            Button deleteObjectButton = findViewById(R.id.deleteObjectButton);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            editObjectButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editObject();
+                }
+            });
+            deleteObjectButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    builder.setTitle("Внимание")
+                            .setMessage("Вы точно хотите удалить " + name.getText() + "?")
+                            .setCancelable(true)
+                            .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish();
+                                    if (Logic.deleteObject(id)) {
+                                        builder.setTitle("Внимание")
+                                                .setMessage("Объект успешно удален")
+                                                .setCancelable(true)
+                                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        finish();
+                                                    }
+                                                })
+                                                .show();
+                                    } else {
+                                        builder.setTitle("Внимание")
+                                                .setMessage("Ошибка при удалении объекта")
+                                                .setCancelable(true)
+                                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        finish();
+                                                    }
+                                                })
+                                                .show();
+                                    }
                                 }
-                            })
-                                    .show();
-                        }else{
-                            builder.setTitle("Внимание")
-                                    .setMessage("Ошибка при возвращении на склад.")
-                                    .setCancelable(true)
-                                    .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            finish();
-                                        }
-                                    })
-                                    .show();
+                            }).setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
                         }
-                    }
-                });
+                    })
+                            .show();
+                }
+            });
+            if (parent.equals("Logic")) {
+                Button rentObjectButton = findViewById(R.id.rentObjectButton);
+                if (!object.status) {
+                    rentObjectButton.setText("Взять в аренду");
+                    rentObjectButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            rentObject();
+                        }
+                    });
+                } else {
+                    rentObjectButton.setText("Вернуть на склад");
+                    rentObjectButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (Logic.returnObject(object.id)) {
+                                builder.setTitle("Внимание")
+                                        .setMessage("Объект успешно возвращен на склад")
+                                        .setCancelable(true)
+                                        .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                finish();
+                                            }
+                                        })
+                                        .show();
+                            } else {
+                                builder.setTitle("Внимание")
+                                        .setMessage("Ошибка при возвращении на склад.")
+                                        .setCancelable(true)
+                                        .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                finish();
+                                            }
+                                        })
+                                        .show();
+                            }
+                        }
+                    });
+                }
             }
         }
     }
-
     void editObject() {
         Intent intent = new Intent(this, FormActivity.class);
         intent.putExtra("id", object.id);

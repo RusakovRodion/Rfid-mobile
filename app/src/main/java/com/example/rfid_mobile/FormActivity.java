@@ -25,8 +25,8 @@ import java.util.Objects;
 public class FormActivity extends AppCompatActivity {
 
     ObjectClass object;
-    Calendar dateAndTime=Calendar.getInstance(new Locale("ru", "RU"));
-    Calendar dateAndTime2=Calendar.getInstance(new Locale("ru", "RU"));
+    Calendar dateAndTime=Calendar.getInstance();
+    Calendar dateAndTime2=Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,19 +186,6 @@ public class FormActivity extends AppCompatActivity {
                     if (name.contains("|") || name.contains("&")){
                         builder.setTitle("Внимание")
                                 .setMessage("Строки содержат запрещенные символы '|', '&'")
-                                .setCancelable(true)
-                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        dialogInterface.cancel();
-                                    }
-                                })
-                                .show();
-                        return;
-                    }
-                    if (name.isEmpty()){
-                        builder.setTitle("Внимание")
-                                .setMessage("Название не может быть пустым")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
                                     @Override
