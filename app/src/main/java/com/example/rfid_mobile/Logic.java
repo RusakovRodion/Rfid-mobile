@@ -138,7 +138,7 @@ public class Logic {
         Socket socket;
         BufferedReader dis;
         DataOutputStream dos;
-        String host = "25.66.192.245";
+        String host = "178.19.252.146";
         int port = 777;
         String answer = "False";
         try {
