@@ -25,7 +25,7 @@ public class ObjectActivity extends AppCompatActivity {
         this.object = Logic.getObjectById(id);
         if (this.object == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Внимание")
+            builder.setTitle("Ошибка")
                     .setMessage("Объект не найден")
                     .setCancelable(true)
                     .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
@@ -92,8 +92,8 @@ public class ObjectActivity extends AppCompatActivity {
                                                 })
                                                 .show();
                                     } else {
-                                        builder.setTitle("Внимание")
-                                                .setMessage("Ошибка при удалении объекта")
+                                        builder.setTitle("Ошибка")
+                                                .setMessage("Объект не был удален")
                                                 .setCancelable(true)
                                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
                                                     @Override
@@ -140,8 +140,8 @@ public class ObjectActivity extends AppCompatActivity {
                                         })
                                         .show();
                             } else {
-                                builder.setTitle("Внимание")
-                                        .setMessage("Ошибка при возвращении на склад.")
+                                builder.setTitle("Ошибка")
+                                        .setMessage("Объект не был возвращен на склад")
                                         .setCancelable(true)
                                         .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
                                             @Override

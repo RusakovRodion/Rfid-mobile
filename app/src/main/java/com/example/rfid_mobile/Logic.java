@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class Logic {
 
@@ -24,7 +23,6 @@ public class Logic {
             String[] temp = i.split("&");
             objects.add(new ObjectClass(temp[0], temp[1], temp[2], temp[3].equals("1"), temp[4]));
         }
-
         return objects;
     }
 
@@ -37,7 +35,7 @@ public class Logic {
 
 
     public static ObjectClass getObjectById(String id) {
-        String msg = "find_object|"+id.toString();
+        String msg = "find_object|"+ id;
         String answer = con(msg);
         String[] temp = answer.split("&");
         if (answer.regionMatches(0, "False", 0, 5)){
@@ -103,7 +101,7 @@ public class Logic {
 
     //TODO сделать автосбор категорий
     public static ArrayList<String> getCategories() {
-        ArrayList<String> categories = new ArrayList<String>();
+        ArrayList<String> categories = new ArrayList<>();
         categories.add("wires");
         categories.add("microphone");
         categories.add("headphones");
@@ -124,7 +122,7 @@ public class Logic {
             }
         }
         msg.append(temp2);
-        msg.append("|").append("");
+        msg.append("|").append(name);
 
         ArrayList<ObjectClass> objects = new ArrayList<>();
         String answer = con(msg.toString());

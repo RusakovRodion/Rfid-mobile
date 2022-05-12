@@ -19,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
 
 public class FormActivity extends AppCompatActivity {
@@ -39,7 +38,7 @@ public class FormActivity extends AppCompatActivity {
             this.object = Logic.getObjectById(id);
 
             TextInputLayout nameView = findViewById(R.id.inputNameBar);
-            Spinner spinner = (Spinner)findViewById(R.id.spinner);
+            Spinner spinner = findViewById(R.id.spinner);
             TextInputLayout descView = findViewById(R.id.inputDescBar);
 
             Objects.requireNonNull(nameView.getEditText()).setText(this.object.name);
@@ -120,8 +119,8 @@ public class FormActivity extends AppCompatActivity {
                                 })
                                 .show();
                     }else{
-                        builder.setTitle("Внимание")
-                                .setMessage("Объект не был изменен. Ошибка.")
+                        builder.setTitle("Ошибка")
+                                .setMessage("Объект не был изменен")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
                                     @Override
@@ -154,7 +153,7 @@ public class FormActivity extends AppCompatActivity {
                         Date startDate2 = new SimpleDateFormat("MMM d, y").parse(startDate);
                         Date endDate2 = new SimpleDateFormat("MMM d, y").parse(endDate);
                         if (startDate2.after(endDate2)){
-                            builder.setTitle("Внимание")
+                            builder.setTitle("Некорректный ввод")
                                     .setMessage("Дата начала не может быть позже даты конца")
                                     .setCancelable(true)
                                     .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
@@ -167,11 +166,10 @@ public class FormActivity extends AppCompatActivity {
                             return;
                         }
                     } catch (java.text.ParseException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                     if (name.isEmpty()){
-                        builder.setTitle("Внимание")
+                        builder.setTitle("Некорректный ввод")
                                 .setMessage("Название не может быть пустым")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
@@ -184,7 +182,7 @@ public class FormActivity extends AppCompatActivity {
                         return;
                     }
                     if (name.contains("|") || name.contains("&")){
-                        builder.setTitle("Внимание")
+                        builder.setTitle("Некорректный ввод")
                                 .setMessage("Строки содержат запрещенные символы '|', '&'")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
@@ -196,10 +194,8 @@ public class FormActivity extends AppCompatActivity {
                                 .show();
                         return;
                     }
-                    //Какой id?
                     RentalClass rentalObject = new RentalClass(name, startDate, endDate, id);
-                    if (Logic.newRental(rentalObject)) {
-                        Logic.rentalObject(id);
+                    if (Logic.newRental(rentalObject) && Logic.rentalObject(id)) {
                         builder.setTitle("Внимание")
                                 .setMessage("Объект успешно арендован")
                                 .setCancelable(true)
@@ -211,8 +207,8 @@ public class FormActivity extends AppCompatActivity {
                                 })
                                 .show();
                     }else{
-                        builder.setTitle("Внимание")
-                                .setMessage("Объект не был арендован. Ошибка.")
+                        builder.setTitle("Ошибка")
+                                .setMessage("Объект не был арендован")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
                                     @Override
@@ -229,7 +225,7 @@ public class FormActivity extends AppCompatActivity {
             setContentView(R.layout.add_form);
             String id = arguments.getString("id");
             TextInputLayout nameView = findViewById(R.id.inputNameBar);
-            Spinner spinner = (Spinner)findViewById(R.id.spinner);
+            Spinner spinner = findViewById(R.id.spinner);
             TextInputLayout descView = findViewById(R.id.inputDescBar);
 
             ArrayList<String> categories = Logic.getCategories();
@@ -250,7 +246,7 @@ public class FormActivity extends AppCompatActivity {
                     boolean status = true;
                     String category = spinner.getSelectedItem().toString();
                     if (name.isEmpty()){
-                        builder.setTitle("Внимание")
+                        builder.setTitle("Некорректный ввод")
                                 .setMessage("Название не может быть пустым")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
@@ -264,7 +260,7 @@ public class FormActivity extends AppCompatActivity {
                         return;
                     }
                     if (description.isEmpty()){
-                        builder.setTitle("Внимание")
+                        builder.setTitle("Некорректный ввод")
                                 .setMessage("Описание не может быть пустым")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
@@ -278,7 +274,7 @@ public class FormActivity extends AppCompatActivity {
                     }
 
                     if (name.contains("|") || name.contains("&") || description.contains("|") || description.contains("&")){
-                        builder.setTitle("Внимание")
+                        builder.setTitle("Некорректный ввод")
                                 .setMessage("Строки содержат запрещенные символы '|', '&'")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
@@ -306,8 +302,8 @@ public class FormActivity extends AppCompatActivity {
                                 })
                                 .show();
                     }else{
-                        builder.setTitle("Внимание")
-                                .setMessage("Объект не был добавлен. Ошибка.")
+                        builder.setTitle("Ошибка")
+                                .setMessage("Объект не был добавлен")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
                                     @Override

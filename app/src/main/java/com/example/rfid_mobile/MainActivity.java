@@ -9,10 +9,8 @@ import android.widget.ListView;
 import android.widget.Button;
 import android.view.View;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import android.widget.AdapterView;
 import android.os.Bundle;
@@ -129,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
     void test(ArrayList<CheckBox> statusCheckboxes, ArrayList<CheckBox> categoryCheckboxes, TextInputLayout nameView, ListView listView, Button rightButton, Button leftButton){
         List<Boolean> category = new ArrayList<>();
-        String status = "";
+        String status;
         if (statusCheckboxes.get(0).isChecked() && !statusCheckboxes.get(1).isChecked())
         {
             status = "false";
