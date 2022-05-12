@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.BoringLayout;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,20 +13,20 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class FormActivity extends AppCompatActivity {
 
     ObjectClass object;
-    Calendar dateAndTime=Calendar.getInstance();
-    Calendar dateAndTime2=Calendar.getInstance();
+    Calendar dateAndTime=Calendar.getInstance(new Locale("ru", "RU"));
+    Calendar dateAndTime2=Calendar.getInstance(new Locale("ru", "RU"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +47,7 @@ public class FormActivity extends AppCompatActivity {
 
 
             ArrayList<String> categories = Logic.getCategories();
-    //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-    //There are multiple variations of this, but this is the basic variant.
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
-    //set the spinners adapter to the previously created one.
             spinner.setAdapter(adapter);
 
             for (int i=0; i<categories.size(); i++)
@@ -66,14 +62,12 @@ public class FormActivity extends AppCompatActivity {
             saveEditButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //String name = (Objects.requireNonNull((nameView).getEditText())).getText().toString().trim();
                     String name = (Objects.requireNonNull((nameView).getEditText())).getText().toString().trim();
                     String description = (Objects.requireNonNull((descView).getEditText())).getText().toString().trim();
                     boolean status = Objects.requireNonNull(Logic.getObjectById(id)).status;
                     String category = spinner.getSelectedItem().toString();
-                    //TODO Сделать проверку на ввод
                     if (name.isEmpty()){
-                        builder.setTitle("Внимание")
+                        builder.setTitle("Некорректный ввод")
                                 .setMessage("Название не может быть пустым")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
@@ -86,7 +80,7 @@ public class FormActivity extends AppCompatActivity {
                         return;
                     }
                     if (description.isEmpty()){
-                        builder.setTitle("Внимание")
+                        builder.setTitle("Некорректный ввод")
                                 .setMessage("Описание не может быть пустым")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
@@ -99,7 +93,7 @@ public class FormActivity extends AppCompatActivity {
                         return;
                     }
                     if (name.contains("|") || name.contains("&") || description.contains("|") || description.contains("&")){
-                        builder.setTitle("Внимание")
+                        builder.setTitle("Некорректный ввод")
                                 .setMessage("Строки содержат запрещенные символы '|', '&'")
                                 .setCancelable(true)
                                 .setPositiveButton("ОК", new DialogInterface.OnClickListener() {

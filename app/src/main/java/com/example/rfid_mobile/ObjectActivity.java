@@ -67,6 +67,7 @@ public class ObjectActivity extends AppCompatActivity {
                         .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                //TODO Диалоговые окна по возвращаемому значению
                                 Logic.deleteObject(id);
                                 finish();
                             }
@@ -87,6 +88,7 @@ public class ObjectActivity extends AppCompatActivity {
                 rentObjectButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //TODO Диалоговые окна по возвращаемому значению
                         rentObject();
                     }
                 });

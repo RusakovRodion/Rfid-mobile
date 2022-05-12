@@ -9,10 +9,9 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Logic {
 
@@ -30,13 +29,10 @@ public class Logic {
     }
 
     public static String[] scanRfid(){
-//        // TODO отсканировать метку
         String msg = "check_rfid";
         String answer = con(msg);
-        String[] tempList = answer.split("\\|");
 
-        //TODO получить правильный ответ (метка не привязана/кортеж)
-        return tempList;
+        return answer.split("\\|");
     }
 
 
@@ -78,17 +74,15 @@ public class Logic {
         String[] temp = answer.split("&");
 
         try {
-            Date date = new SimpleDateFormat("MMM d, y").parse(temp[1]);
-            temp[1] = new SimpleDateFormat("dd.MM.yy").format(date);
-            date = new SimpleDateFormat("MMM d, y").parse(temp[2]);
-            temp[2] = new SimpleDateFormat("dd.MM.yy").format(date);
+            Date date = new SimpleDateFormat("MMM d, y", Locale.forLanguageTag("ru")).parse(temp[1]);
+            temp[1] = new SimpleDateFormat("dd.MM.yy", Locale.forLanguageTag("ru")).format(date);
+            date = new SimpleDateFormat("MMM d, y", Locale.forLanguageTag("ru")).parse(temp[2]);
+            temp[2] = new SimpleDateFormat("dd.MM.yy", Locale.forLanguageTag("ru")).format(date);
         } catch (java.text.ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        RentalClass rental = new RentalClass(temp[0], temp[1], temp[2], id);
-        return rental;
+        return new RentalClass(temp[0], temp[1], temp[2], id);
     }
 
 
@@ -138,45 +132,8 @@ public class Logic {
             objects.add(new ObjectClass(temp[0], temp[1], temp[2], temp[3].equals("1"), temp[4]));
         }
         return objects;
-        //return getObjects();
     }
-//        List<ObjectClass> filteredObjects = new ArrayList<>();
-//        String[] categories = getCategories().toArray(new String[0]);
-//        Boolean statusCheck = null;
-//        if (status.get(0) && !status.get(1)) statusCheck = true;
-//        else if (!status.get(0) && status.get(1)) statusCheck = false;
-//        boolean categoryCheck = false;
-//        boolean nameCheck = false;
-//        name = name.toLowerCase();
-//        for (Boolean cat:category) {
-//            if (cat)
-//            {
-//                categoryCheck = true;
-//                break;
-//            }
-//        }
-//        if (!name.isEmpty()) {
-//            nameCheck = true;
-//        }
-//        for (ObjectClass object:getObjects())
-//        {
-//            if ( statusCheck == null || object.status == statusCheck)
-//            {
-//                if (categoryCheck) {
-//                    for (int i = 0; i < category.size(); i++) {
-//                        if (category.get(i) && object.category.equals(categories[i])) {
-//                            if (nameCheck) {
-//                                if (object.name.toLowerCase().contains(name)) filteredObjects.add(object);
-//                            }else filteredObjects.add(object);
-//                        }
-//                    }
-//                }else if (nameCheck) {
-//                    if (object.name.toLowerCase().contains(name)) filteredObjects.add(object);
-//                }else filteredObjects.add(object);
-//            }
-//        }
-//        return filteredObjects;
-//    }
+
     public static String con(String msg) {
         Socket socket;
         BufferedReader dis;
