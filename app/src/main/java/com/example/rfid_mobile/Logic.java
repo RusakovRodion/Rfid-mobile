@@ -7,8 +7,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class Logic {
@@ -41,6 +44,7 @@ public class Logic {
         String msg = "find_object|"+id.toString();
         String answer = con(msg);
         String[] temp = answer.split("&");
+
         return new ObjectClass(temp[0], temp[1], temp[2], temp[3].equals("1"), temp[4]);
     }
 
@@ -72,6 +76,17 @@ public class Logic {
         String msg = "infa_rental|"+id;
         String answer = con(msg);
         String[] temp = answer.split("&");
+
+        try {
+            Date date = new SimpleDateFormat("MMM d, y").parse(temp[1]);
+            temp[1] = new SimpleDateFormat("dd.MM.yy").format(date);
+            date = new SimpleDateFormat("MMM d, y").parse(temp[2]);
+            temp[2] = new SimpleDateFormat("dd.MM.yy").format(date);
+        } catch (java.text.ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         RentalClass rental = new RentalClass(temp[0], temp[1], temp[2], id);
         return rental;
     }
