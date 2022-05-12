@@ -91,6 +91,7 @@ public class Logic {
         return rental;
     }
 
+
     public static Boolean rentalObject(String id) {
         String msg = "rental_object|"+id;
         String answer = con(msg);
@@ -104,7 +105,7 @@ public class Logic {
     }
 
 
-
+    //TODO сделать автосбор категорий
     public static ArrayList<String> getCategories() {
         ArrayList<String> categories = new ArrayList<String>();
         categories.add("wires");

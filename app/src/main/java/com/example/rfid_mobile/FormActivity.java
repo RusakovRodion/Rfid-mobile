@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.BoringLayout;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,8 +17,10 @@ import android.widget.Spinner;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class FormActivity extends AppCompatActivity {
@@ -68,6 +71,46 @@ public class FormActivity extends AppCompatActivity {
                     String description = (Objects.requireNonNull((descView).getEditText())).getText().toString().trim();
                     boolean status = Objects.requireNonNull(Logic.getObjectById(id)).status;
                     String category = spinner.getSelectedItem().toString();
+                    //TODO Сделать проверку на ввод
+                    if (name.isEmpty()){
+                        builder.setTitle("Внимание")
+                                .setMessage("Название не может быть пустым")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
+                    if (description.isEmpty()){
+                        builder.setTitle("Внимание")
+                                .setMessage("Описание не может быть пустым")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
+                    if (name.contains("|") || name.contains("&") || description.contains("|") || description.contains("&")){
+                        builder.setTitle("Внимание")
+                                .setMessage("Строки содержат запрещенные символы '|', '&'")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
 
                     ObjectClass obj = new ObjectClass(id, name, description, status, category);
                     if (Logic.saveEdit(obj))
@@ -113,6 +156,65 @@ public class FormActivity extends AppCompatActivity {
                     String name = (Objects.requireNonNull((renterName).getEditText())).getText().toString().trim();
                     String startDate = dateButton.getText().toString().trim();
                     String endDate = dateButton2.getText().toString().trim();
+                    try {
+                        Date startDate2 = new SimpleDateFormat("MMM d, y").parse(startDate);
+                        Date endDate2 = new SimpleDateFormat("MMM d, y").parse(endDate);
+                        if (startDate2.after(endDate2)){
+                            builder.setTitle("Внимание")
+                                    .setMessage("Дата начала не может быть позже даты конца")
+                                    .setCancelable(true)
+                                    .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    })
+                                    .show();
+                            return;
+                        }
+                    } catch (java.text.ParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    if (name.isEmpty()){
+                        builder.setTitle("Внимание")
+                                .setMessage("Название не может быть пустым")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
+                    if (name.contains("|") || name.contains("&")){
+                        builder.setTitle("Внимание")
+                                .setMessage("Строки содержат запрещенные символы '|', '&'")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
+                    if (name.isEmpty()){
+                        builder.setTitle("Внимание")
+                                .setMessage("Название не может быть пустым")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
                     //Какой id?
                     RentalClass rentalObject = new RentalClass(name, startDate, endDate, id);
                     if (Logic.newRental(rentalObject)) {
@@ -166,6 +268,48 @@ public class FormActivity extends AppCompatActivity {
                     String description = (Objects.requireNonNull((descView).getEditText())).getText().toString().trim();
                     boolean status = true;
                     String category = spinner.getSelectedItem().toString();
+                    if (name.isEmpty()){
+                        builder.setTitle("Внимание")
+                                .setMessage("Название не может быть пустым")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
+                    if (description.isEmpty()){
+                        builder.setTitle("Внимание")
+                                .setMessage("Описание не может быть пустым")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
+
+                    if (name.contains("|") || name.contains("&") || description.contains("|") || description.contains("&")){
+                        builder.setTitle("Внимание")
+                                .setMessage("Строки содержат запрещенные символы '|', '&'")
+                                .setCancelable(true)
+                                .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                })
+                                .show();
+                        return;
+                    }
+
 
                     ObjectClass obj = new ObjectClass(id, name, description, status, category);
                     if (Logic.addObject(obj))

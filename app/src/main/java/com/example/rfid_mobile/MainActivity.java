@@ -1,7 +1,9 @@
 package com.example.rfid_mobile;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.ListView;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import android.widget.AdapterView;
 import android.os.Bundle;
@@ -54,15 +57,26 @@ public class MainActivity extends AppCompatActivity {
         Button searchButton = findViewById(R.id.searchButton);
 
         Button addObjectFromMainBtn = findViewById(R.id.addObjectFromMainBtn);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         addObjectFromMainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] args = Logic.scanRfid();
-                if (args[0].equals("False")){
-                    openEmptyObject(args[1]);
-                }else{
-                    openObject(args[1]);
-                }
+                builder.setTitle("Внимание")
+                        .setMessage("Нажмите кнопку Ок, а затем приложите метку к считывателю")
+                        .setCancelable(false)
+                        .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String[] args;
+                        args = Logic.scanRfid();
+                        if (args[0].equals("False")){
+                            openEmptyObject(args[1]);
+                        }else{
+                            openObject(args[1], "Logic");
+                        }
+                    }
+                })
+                        .show();
             }
         });
 
@@ -73,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
                 ObjectClass selectedObject = (ObjectClass)parent.getItemAtPosition(position);
-                openObject(selectedObject.id);
+                openObject(selectedObject.id, "MainActivity");
             }
         };
         listView.setOnItemClickListener(itemListener);
@@ -114,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     void test(ArrayList<CheckBox> statusCheckboxes, ArrayList<CheckBox> categoryCheckboxes, TextInputLayout nameView, ListView listView, Button rightButton, Button leftButton){
-
         List<Boolean> category = new ArrayList<>();
         String status = "";
         if (statusCheckboxes.get(0).isChecked() && !statusCheckboxes.get(1).isChecked())
@@ -156,12 +169,11 @@ public class MainActivity extends AppCompatActivity {
         testDraw(currentPage, listView);
     }
 
-    void openObject(String idRfid) {
+    void openObject(String idRfid, String type) {
         ObjectClass object = Logic.getObjectById(idRfid);
         Intent intent = new Intent(this, ObjectActivity.class);
         intent.putExtra("id", object.id);
-        //intent.putExtra("parent", "MainActivity");
-        intent.putExtra("parent", "Logic");
+        intent.putExtra("parent", type);
         this.startActivityForResult(intent, 1);
     }
 
