@@ -67,7 +67,19 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String[] args;
                         args = Logic.scanRfid();
-                        if (args[0].equals("False")){
+                        if (args[0].equals("Connection timed out")) {
+                            builder.setTitle("Внимание")
+                                    .setMessage("Метка не была приложена. Попробуйте еще раз.")
+                                    .setCancelable(true)
+                                    .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            finish();
+                                        }
+                                    })
+                                    .show();
+                        }
+                        else if (args[0].equals("False")){
                             openEmptyObject(args[1]);
                         }else{
                             openObject(args[1], "Logic");

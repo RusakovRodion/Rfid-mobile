@@ -29,7 +29,6 @@ public class Logic {
     public static String[] scanRfid(){
         String msg = "check_rfid";
         String answer = con(msg);
-
         return answer.split("\\|");
     }
 
