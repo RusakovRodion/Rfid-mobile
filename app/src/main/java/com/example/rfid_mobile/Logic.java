@@ -73,15 +73,6 @@ public class Logic {
         String answer = con(msg);
         String[] temp = answer.split("&");
 
-        try {
-            Date date = new SimpleDateFormat("MMM d, y").parse(temp[1]);
-            temp[1] = new SimpleDateFormat("dd.MM.yy").format(date);
-            date = new SimpleDateFormat("MMM d, y").parse(temp[2]);
-            temp[2] = new SimpleDateFormat("dd.MM.yy").format(date);
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-
         return new RentalClass(temp[0], temp[1], temp[2], id);
     }
 
@@ -89,7 +80,7 @@ public class Logic {
     public static Boolean rentalObject(String id) {
         String msg = "rental_object|"+id;
         String answer = con(msg);
-        return answer.equals("true");
+        return !answer.regionMatches(0, "False", 0, 5);
     }
 
     public static Boolean addObject(ObjectClass obj){

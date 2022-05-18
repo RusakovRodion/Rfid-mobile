@@ -150,8 +150,8 @@ public class FormActivity extends AppCompatActivity {
                     String startDate = dateButton.getText().toString().trim();
                     String endDate = dateButton2.getText().toString().trim();
                     try {
-                        Date startDate2 = new SimpleDateFormat("MMM d, y").parse(startDate);
-                        Date endDate2 = new SimpleDateFormat("MMM d, y").parse(endDate);
+                        Date startDate2 = new SimpleDateFormat("dd.MM.yy").parse(startDate);
+                        Date endDate2 = new SimpleDateFormat("dd.MM.yy").parse(endDate);
                         if (startDate2.after(endDate2)){
                             builder.setTitle("Некорректный ввод")
                                     .setMessage("Дата начала не может быть позже даты конца")
@@ -352,11 +352,11 @@ public class FormActivity extends AppCompatActivity {
         Button dateButton = findViewById(R.id.dateButton);
         dateButton.setText(DateUtils.formatDateTime(this,
                 dateAndTime.getTimeInMillis(),
-                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+                DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_YEAR));
 
         Button dateButton2 = findViewById(R.id.dateButton2);
         dateButton2.setText(DateUtils.formatDateTime(this,
                 dateAndTime2.getTimeInMillis(),
-                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+                DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
 }
