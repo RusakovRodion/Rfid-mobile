@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -57,9 +58,11 @@ public class ObjectActivity extends AppCompatActivity {
             desc.setText(object.description);
             TextView status = findViewById(R.id.statusObject);
             if (!object.status) {
-                status.setText("Статус: на складе");
+                status.setText("✔ на складе");
+                status.setTextColor(Color.GREEN);
             } else {
-                status.setText("Статус: арендован");
+                status.setText("╳ арендован");
+                status.setTextColor(Color.RED);
             }
 
             Button editObjectButton = findViewById(R.id.editObjectButton);

@@ -55,6 +55,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
 
+
     <Button
         android:id="@+id/dateButton"
         android:layout_width="match_parent"
@@ -120,6 +121,7 @@
             android:id="@+id/renterNameBar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:autoText="false"
             android:backgroundTint="@color/black"
             android:textColor="@color/black"
             tools:ignore="SpeakableTextPresentCheck" />

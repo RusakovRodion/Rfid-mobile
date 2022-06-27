@@ -95,11 +95,12 @@ public class MainActivity extends AppCompatActivity {
         AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
-                ObjectClass selectedObject = (ObjectClass)parent.getItemAtPosition(position);
-                openObject(selectedObject.id, "MainActivity");
+                //ObjectClass selectedObject = (ObjectClass)parent.getItemAtPosition(position);
+               // openObject(selectedObject.id, "MainActivity");
             }
         };
+
+
         listView.setOnItemClickListener(itemListener);
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
