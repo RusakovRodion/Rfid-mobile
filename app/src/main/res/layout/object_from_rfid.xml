@@ -21,53 +21,19 @@
         />
 
     <Button
-        android:id="@+id/deleteObjectButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="100dp"
-        android:backgroundTint="@color/green"
-        android:text="Удалить"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editObjectButton"
-        tools:ignore="HardcodedText" />
-
-    <Button
         android:id="@+id/rentObjectButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="237dp"
+        android:layout_height="70dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="100dp"
+        android:layout_marginBottom="168dp"
         android:backgroundTint="@color/green"
         android:text="Взять в аренду"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteObjectButton"
-        tools:ignore="HardcodedText" />
-
-    <Button
-        android:id="@+id/editObjectButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="100dp"
-        android:text="Редактировать"
-        android:backgroundTint="@color/green"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/objectInfo"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

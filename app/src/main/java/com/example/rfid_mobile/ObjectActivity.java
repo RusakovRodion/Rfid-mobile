@@ -65,8 +65,8 @@ public class ObjectActivity extends AppCompatActivity {
                 status.setTextColor(Color.RED);
             }
 
-            Button editObjectButton = findViewById(R.id.editObjectButton);
-            Button deleteObjectButton = findViewById(R.id.deleteObjectButton);
+            Button editObjectButton = findViewById(R.id.editObjectButton5);
+            Button deleteObjectButton = findViewById(R.id.deleteObjectButton3);
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             editObjectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
